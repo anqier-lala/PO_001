@@ -28,7 +28,7 @@ class MainPage(object):   #object 是所有类的父类
         return value
         logger.info('获取公司名成功，公司名是'+str(value))
 
-    def goto_myone(self):   #进入我的地盘
+    def goto_myzone(self):   #进入我的地盘
         self.myzone_menu.click()
 
     def goto_product(self):   #进入产品
@@ -40,11 +40,17 @@ class MainPage(object):   #object 是所有类的父类
 
 
 if __name__ == '__main__':
-    main_pagin=MainPage()
+    main_pagin=MainPage()   #初始化的时候已经全部识别所有元素
     companyname=main_pagin.get_companyname()
     print(companyname)
     username=main_pagin.get_username()
     print(username)
+    main_pagin.goto_myzone()   ##不能点击到我的地盘，线性脚本是识别一个元素操作一个元素，目前版本的是PO模式，实例化页面对象之后，识别所有
+    #的元素，然后再去操作，可能发生元素不能识别的问题。
+    main_pagin.goto_product()
+
+
+
 
 
 
