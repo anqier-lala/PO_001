@@ -44,7 +44,7 @@ class MainPage(BasePage):   #object 是所有类的父类
 
 
     def get_companyname(self):   #方法===>控件的操作
-        value=self.get_title(self.companyname_showbox)
+        value=self.get_element_attribute(self.companyname_showbox,'title')
         return value
 
     def goto_myzone(self):   #进入我的地盘
@@ -62,9 +62,9 @@ if __name__ == '__main__':
     driver = webdriver.Chrome()
     main_pagin=MainPage(driver)
     time.sleep(3)
-    main_pagin.get_companyname()
+    print(main_pagin.get_companyname())
     time.sleep(3)
-    main_pagin.get_username()
+    print(main_pagin.get_username())
     main_pagin.goto_myzone()
     main_pagin.goto_product()
 
