@@ -1,5 +1,6 @@
 #coding=gbk
 import os
+import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from common.log_utils import logger
@@ -48,8 +49,27 @@ class LoginPage(BasePage):
         self.click( self.login_button )
 
 if __name__=="__main__":
+    from common.base_page import BasePage
     driver=set_driver()
-    login_page =  LoginPage(driver)
-    login.test_login(config.get_url,config.get_user_name,config.get_password,driver)
+# 正常
+#     login_page = LoginPage(driver)
+#     login.test_login(config.get_url,config.get_user_name,config.get_password,driver)
+
+##待解决：这种异常的数据如何输入，且做校验。
+# 异常1-用户名输入错误
+    login_page = LoginPage(driver)
+    login.test_login(config.get_url, config.get_error_user_name, config.get_password, driver)
+    time.sleep(2)
+    print(login_page.get_alert_content(driver))
+
+# #异常2-密码输入错误
+#     login_page = LoginPage(driver)
+#     login.test_login(config.get_url, config.get_user_name, config.get_error_password, driver)
+#     time.sleep(2)
+#     print(login_page.get_alert_content(driver))
+
+
+
+
 
 

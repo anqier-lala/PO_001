@@ -31,6 +31,17 @@ class ConfigUtils:
         value = self.read_ini('user', 'password')
         return value
 
+    @property
+    def get_error_user_name(self):
+        value=self.read_ini('user','error_user_name')
+        return value
+
+    @property
+    def get_error_password(self):
+        value = self.read_ini('user', 'error_password')
+        return value
+
+
 config=ConfigUtils()   #直接定义一个方法，在外部直接调用该方法就可以，不需要再每次都创建一个对象
 
 
