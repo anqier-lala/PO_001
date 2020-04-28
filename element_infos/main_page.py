@@ -30,7 +30,7 @@ class MainPage(BasePage):   #object 是所有类的父类
         #                     'locator_value':"//li[@data-id='product']",
         #                     'timeout':3}
         #
-        # self.product_menu ={'element_name':'迭代',
+        # self.product_menu ={'element_name':'产品',
         #                     'locator_type':'xpath',
         #                     'locator_value':"//li[@data-id='product']",
         #                     'timeout':3}

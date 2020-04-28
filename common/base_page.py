@@ -5,7 +5,7 @@ from  selenium import  webdriver
 from selenium.webdriver.common.by import By  #导入by方法
 from selenium.webdriver.support.wait import WebDriverWait
 
-from common.login_utils import logger
+from common.log_utils import logger
 
 class BasePage(object):
     def __init__(self,driver):
@@ -38,7 +38,7 @@ class BasePage(object):
     def find_element(self,element_info):
         locator_type_name=element_info['locator_type']
         locator_value_info=element_info['locator_value']
-        locator_timeout=element_info['time_out']
+        locator_timeout=element_info['timeout']
         if locator_type_name =='id':
             locator_type=By.ID
         elif locator_type_name=='class':
