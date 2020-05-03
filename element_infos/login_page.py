@@ -37,10 +37,11 @@ class LoginPage(BasePage):
         self.username_inputbox =elements['username_inputbox']
         self.password_inputbox=elements['password_inputbox']
         self.login_button=elements['login_button']
-
+        self.change_language=elements['change_language']
 
     def input_username(self,username): #方法 == 》控件的操作
         self.input( self.username_inputbox , username )
+
 
     def input_password(self,password):
         self.input( self.password_inputbox , password )
@@ -48,19 +49,23 @@ class LoginPage(BasePage):
     def click_login(self):
         self.click( self.login_button )
 
+    def moveto_change_language(self):
+        self.moveto_element(self.change_language)
+
+
 if __name__=="__main__":
     from common.base_page import BasePage
     driver=set_driver()
 # 正常
-#     login_page = LoginPage(driver)
-#     login.test_login(config.get_url,config.get_user_name,config.get_password,driver)
+    login_page = LoginPage(driver)
+    login.test_login(config.get_url,config.get_user_name,config.get_password,driver)
 
 ##待解决：这种异常的数据如何输入，且做校验。
 # 异常1-用户名输入错误
-    login_page = LoginPage(driver)
-    login.test_login(config.get_url, config.get_error_user_name, config.get_password, driver)
-    time.sleep(2)
-    print(login_page.get_alert_content(driver))
+#     login_page = LoginPage(driver)
+#     login.test_login(config.get_url, config.get_error_user_name, config.get_password, driver)
+#     time.sleep(2)
+#     print(login_page.get_alert_content(driver))
 
 # #异常2-密码输入错误
 #     login_page = LoginPage(driver)
