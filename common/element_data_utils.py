@@ -1,5 +1,7 @@
+#coding=gbk
 import  os
 import xlrd
+from common.config_utils import config
 
 current_path=os.path.dirname(__file__)
 excel_path=os.path.join(current_path,'../element_info_datas/element_infos.xlsx')
@@ -18,7 +20,9 @@ class ElementdataUtils:
             element_info['element_name'] = self.sheet.cell_value(i, 1)
             element_info['locator_type'] = self.sheet.cell_value(i, 3)  ##所属页面不要取值
             element_info['locator_value'] = self.sheet.cell_value(i, 4)
-            element_info['timeout'] = self.sheet.cell_value(i, 5)
+            timeout_value=self.sheet.cell_value(i, 5)   #先取出超时时间单元格的值
+            #如果该单元格内没有浮点型的值的话，就取值默认配置中的值
+            element_info['timeout'] = timeout_value if isinstance(timeout_value,float)else config.get_timeout
             element_infos[self.sheet.cell_value(i, 0)] = element_info
         return element_infos
 

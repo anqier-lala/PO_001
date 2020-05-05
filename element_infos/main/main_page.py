@@ -1,16 +1,11 @@
 #coding=gbk
-import os
 import time
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from common.log_utils import logger
 from common.base_page import BasePage
 from common.config_utils import config
 from common import login
-from common.set_driver import set_driver
-from element_infos.login_page import LoginPage
 from common.element_data_utils import ElementdataUtils
-
+from element_infos.login.login_page import LoginPage
 
 class MainPage(BasePage):   #object 是所有类的父类
     def __init__(self, driver):
@@ -83,9 +78,9 @@ class MainPage(BasePage):   #object 是所有类的父类
 if __name__ == '__main__':
     driver = webdriver.Chrome()
     main_page=MainPage(driver)
-    time.sleep(1)
+    main_page.wait()   #调试调用封装的等待方法
     print(main_page.get_companyname())
-    time.sleep(1)
+    main_page.wait(1)
     print(main_page.get_username())
     time.sleep(1)
     print(main_page.goto_myzone())

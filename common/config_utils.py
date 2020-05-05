@@ -1,3 +1,4 @@
+#coding=gbk
 import  os
 import configparser
 
@@ -9,7 +10,7 @@ print(cfgpath)
 class ConfigUtils:
     def __init__(self,config_path=cfgpath):
         self.__conf=configparser.ConfigParser()  ##做成私有实例属性，仅在类的内部使用，外部不可访问，也提高使用的简洁度
-        self.__conf.read(config_path, encoding="utf-8")
+        self.__conf.read(config_path, encoding="gbk")  #因为编辑器设置的是gbk,所以配置文件读取的时候这里也需要设置为gbk
 
     def read_ini(self,sec,option):
         value=self.__conf.get(sec,option)
@@ -32,17 +33,18 @@ class ConfigUtils:
         return value
 
     @property
-    def get_error_user_name(self):
-        value=self.read_ini('user','error_user_name')
+    def get_timeout(self):
+        value = float(self.read_ini('default', 'timeout'))
         return value
 
     @property
-    def get_error_password(self):
-        value = self.read_ini('user', 'error_password')
+    def screenshot_path(self):
+        value = self.read_ini('default', 'screen_shot_path')
         return value
 
 
-config=ConfigUtils()   #直接定义一个方法，在外部直接调用该方法就可以，不需要再每次都创建一个对象
+# #直接定义一个方法，在外部直接调用该方法就可以，不需要再每次都创建一个对象
+config=ConfigUtils()
 
 
 if __name__=='__main__':
@@ -52,4 +54,5 @@ if __name__=='__main__':
     print(config_u.get_url)
     print(config_u.get_user_name)
     print(config_u.get_password)
+    print(config_u.screenshot_path)
 

@@ -33,7 +33,7 @@ class LoginPage(BasePage):
         # current_path = os.path.dirname(__file__)
         # yaml_path = os.path.join(current_path, '../element_info_datas/element_login_infos.yaml')
         # elements=ElementdataYamlUtils().get_yaml_element_info(yaml_path)
-        #####公共####
+        #####公共###
         self.username_inputbox =elements['username_inputbox']
         self.password_inputbox=elements['password_inputbox']
         self.login_button=elements['login_button']
@@ -54,11 +54,21 @@ class LoginPage(BasePage):
 
 
 if __name__=="__main__":
-    from common.base_page import BasePage
     driver=set_driver()
-# 正常
-    login_page = LoginPage(driver)
-    login.test_login(config.get_url,config.get_user_name,config.get_password,driver)
+    login_page =  LoginPage(driver)
+    login_page.open_url('http://127.0.0.1/zentao/user-login-L3plbnRhby9teS5odG1s.html')
+    login_page.input_username('admin')
+    login_page.input_password('201314ANQIER1')
+    login_page.click_login()
+    login_page.screenshot_as_file()  ##不能截屏
+
+#     from common.base_page import BasePage
+#     driver=set_driver()
+# # 正常
+#     login_page = LoginPage(driver)
+#     login.test_login(config.get_url, config.get_user_name, config.get_password, driver)
+#     login_page.screenshot_as_file()
+
 
 ##待解决：这种异常的数据如何输入，且做校验。
 # 异常1-用户名输入错误

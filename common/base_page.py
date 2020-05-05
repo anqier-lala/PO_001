@@ -4,9 +4,11 @@ import time
 from  selenium import  webdriver
 from selenium.webdriver.common.by import By  #导入by方法
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains   ##对鼠标事件操作
 from selenium.webdriver.common.keys import Keys # 对键盘事件操作
 from common.log_utils import logger
+from common.config_utils import config
 
 
 
@@ -40,6 +42,13 @@ class BasePage(object):
         self.driver.quit()
         logger.info("关闭浏览器")
 
+    # ------ ------------------------------------- 等待封装---------------------------------------------------#
+    def implicitly_wait(self,seconds=config.get_timeout):
+        self.driver.implicitly_wait(seconds)
+
+    def wait(self,seconds=config.get_timeout):
+        time.sleep(seconds)
+
     # ------ ------------------------------------- 元素识别的封装----------------------------------------------#
     def find_element(self,element_info):
         locator_type_name=element_info['locator_type']
@@ -57,7 +66,7 @@ class BasePage(object):
         logger.info('[%s]元素识别成功'%element_info['element_name'])
         return element
 
-    # ------ -------------------------------------获取属性封装-------------------------------------#
+    # ------ -------------------------------------获取属性封装----------------------------------------------#
     #获取元素属性封装
     def get_element_attribute(self,element_info,attribute_name):
         element=self.find_element(element_info)
@@ -86,11 +95,18 @@ class BasePage(object):
         mouse.context_click(element).perform()
 
     #元素鼠标操作：移动到该元素上--测试OK
-    def moveto_element(self,element_info):
-        mouse = ActionChains(self.driver)
+    def move_to_element_by_mouse(self,element_info):
         element = self.find_element(element_info)
+        mouse = ActionChains(self.driver)
         logger.info('将鼠标移动到[%s]元素上' % element_info['element_name'])
         mouse.move_to_element(element).perform()
+
+    def long_press_element(self,element_info,senconds):
+        element = self.find_element(element_info)
+        logger.info('将鼠标长按到[%s]元素上后松开' % element_info['element_name'])
+        mouse = ActionChains(self.driver)
+        mouse.click_and_hold(element).pause(senconds).release(element)
+
 
     def scrollIntoView(self,element_info):
         element=self.find_element(element_info)
@@ -143,14 +159,15 @@ class BasePage(object):
 
     # ------ ------------------------------------- 弹窗封装----------------------------------------------#
     #弹窗处理封装-测试OK
-    def get_alert_content(self,driver):
-        time.sleep(3)
-        alert = driver.switch_to.alert  # 切换到js弹窗
-        value = alert.text
+    def get_alert_content(self,action='accept',timeout=config.get_timeout):
+        WebDriverWait(self.driver, timeout).until(EC.alert_is_present())
+        alter = self.driver.switch_to.alert
+        value = alter.text
         logger.info('当前弹窗的内容为：%s' % value)
-        time.sleep(1)
-        alert.accept()
-        logger.info('点击弹窗的确定按钮成功')
+        if action == 'accept':
+            alter.accept()
+        elif action == 'dismiss':
+            alter.dismiss()
         return value
 
     # ------ -------------------------------------frame封装-----------------------------------------------#
@@ -169,6 +186,21 @@ class BasePage(object):
         self.driver.switch_to.frame(element)
         logger.info('[%s]frame元素切换成功' % (element_info["element_name"]))
 
+    #------------------------------------selenium执行js封装-----------------------------------------------#
+    def execute_script(self,js_str,element_info=None):
+        if element_info:
+            self.driver.execute_script(js_str)
+        else:
+            self.driver.execute_script(js_str,None)
+
+    def delete_element_attribute(self,element_info,attribute_name):
+        element = self.find_element(element_info)
+        self.driver.execute_script('arguments[0].removeAttribute("%s");'%attribute_name,element)
+
+    def update_element_attribute(self, element_info, attribute_name,attribute_value):
+        element = self.find_element(element_info)
+        self.driver.execute_script('arguments[0].setAttribute("%s","%s");' %(attribute_name,attribute_value), element)
+
     # ------ -------------------------------------切换句柄封装-------------------------------------------#
     ##方式一
     def switch_window_by_title(self,title):
@@ -185,5 +217,20 @@ class BasePage(object):
             if self.driver.current_url.__contains__(url):
                 break
         logger.info('切换到URL为[%s]的句柄成功!' % url)
+
+    #----------------------------截图封装-----------------------------------------------------------#
+    def screenshot_as_file(self, *screenshot_path):
+        current_dir = os.path.dirname(__file__)
+        if len(screenshot_path) == 0:
+            screenshot_filepath = config.screenshot_path
+        else:
+            screenshot_filepath = screenshot_path[0]
+        now = time.strftime('%Y_%m_%d_%H_%M_%S')
+        screenshot_filepath = os.path.join(current_dir, '..' ,screenshot_filepath, 'UITest_%s.png' % now)
+        self.driver.get_screenshot_as_file(screenshot_filepath)
+        logger.info('图片截取成功')
+
+
+
 
 
