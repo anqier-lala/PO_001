@@ -6,7 +6,6 @@ from selenium.webdriver.common.by import By
 from common.log_utils import logger
 from common.base_page import BasePage
 from common.config_utils import config
-from common import login
 from common.set_driver import set_driver
 from common.element_data_utils import ElementdataUtils
 from common.element_yamldate_utils import ElementdataYamlUtils
@@ -28,7 +27,7 @@ class LoginPage(BasePage):
         #                           'locator_value': '//button[@id="submit"]',
         #                           'timeout': 2}
         ####-----------------第二种方式，使用excecl读取---------------------####
-        elements=ElementdataUtils('login_page').get_element_info()
+        elements = ElementdataUtils('login').get_element_info('login_page')
         ####-----------------第三种方式，使用yaml读取---------------------####
         # current_path = os.path.dirname(__file__)
         # yaml_path = os.path.join(current_path, '../element_info_datas/element_login_infos.yaml')
@@ -42,7 +41,6 @@ class LoginPage(BasePage):
     def input_username(self,username): #方法 == 》控件的操作
         self.input( self.username_inputbox , username )
 
-
     def input_password(self,password):
         self.input( self.password_inputbox , password )
 
@@ -52,36 +50,22 @@ class LoginPage(BasePage):
     def moveto_change_language(self):
         self.moveto_element(self.change_language)
 
+    def get_login_fail_alert_content(self):
+        return self.get_alert_content()
+
 
 if __name__=="__main__":
     driver=set_driver()
-    login_page =  LoginPage(driver)
-    login_page.open_url('http://127.0.0.1/zentao/user-login-L3plbnRhby9teS5odG1s.html')
+    login_page=LoginPage(driver)
+    login_page.open_url(config.get_url)
     login_page.input_username('admin')
     login_page.input_password('201314ANQIER1')
     login_page.click_login()
-    login_page.screenshot_as_file()  ##不能截屏
+    value=login_page.get_alert_content(action='accept', timeout=config.get_timeout)
+    print(value)
+    login_page.wait(1)
+    login_page.screenshot_as_file()  ##需要先建立路径，才能截屏
 
-#     from common.base_page import BasePage
-#     driver=set_driver()
-# # 正常
-#     login_page = LoginPage(driver)
-#     login.test_login(config.get_url, config.get_user_name, config.get_password, driver)
-#     login_page.screenshot_as_file()
-
-
-##待解决：这种异常的数据如何输入，且做校验。
-# 异常1-用户名输入错误
-#     login_page = LoginPage(driver)
-#     login.test_login(config.get_url, config.get_error_user_name, config.get_password, driver)
-#     time.sleep(2)
-#     print(login_page.get_alert_content(driver))
-
-# #异常2-密码输入错误
-#     login_page = LoginPage(driver)
-#     login.test_login(config.get_url, config.get_user_name, config.get_error_password, driver)
-#     time.sleep(2)
-#     print(login_page.get_alert_content(driver))
 
 
 

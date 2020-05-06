@@ -43,6 +43,7 @@ class BasePage(object):
         logger.info("关闭浏览器")
 
     # ------ ------------------------------------- 等待封装---------------------------------------------------#
+    #测试OK
     def implicitly_wait(self,seconds=config.get_timeout):
         self.driver.implicitly_wait(seconds)
 
@@ -67,14 +68,14 @@ class BasePage(object):
         return element
 
     # ------ -------------------------------------获取属性封装----------------------------------------------#
-    #获取元素属性封装
+    #获取元素属性封装-测试OK
     def get_element_attribute(self,element_info,attribute_name):
         element=self.find_element(element_info)
         value=element.get_attribute(attribute_name)
         logger.info('[%s]元素的%s的值为：%s'%(element_info['element_name'],attribute_name,value))
         return  value
 
-    #获取元素text属性封装
+    #获取元素text属性封装-测试OK
     def get_text(self,element_info):
         text=self.find_element(element_info).text
         logger.info('[%s]元素的text值为：%s'%(element_info['element_name'],text))
@@ -202,7 +203,7 @@ class BasePage(object):
         self.driver.execute_script('arguments[0].setAttribute("%s","%s");' %(attribute_name,attribute_value), element)
 
     # ------ -------------------------------------切换句柄封装-------------------------------------------#
-    ##方式一
+    ##方式一--测试OK
     def switch_window_by_title(self,title):
         for handle in self.driver.window_handles:
             self.driver.switch_to.window(handle)
@@ -210,7 +211,7 @@ class BasePage(object):
                 break
         logger.info('切换到网页标题为[%s]的句柄成功!'%title)
 
-    #方式二
+    #方式二--测试OK
     def switch_window_by_url(self,url):
         for handle in self.driver.window_handles:
             self.driver.switch_to.window(handle)
@@ -218,7 +219,8 @@ class BasePage(object):
                 break
         logger.info('切换到URL为[%s]的句柄成功!' % url)
 
-    #----------------------------截图封装-----------------------------------------------------------#
+    #----------------------------截图封装----------------------------------------------------------#
+    #测试OK
     def screenshot_as_file(self, *screenshot_path):
         current_dir = os.path.dirname(__file__)
         if len(screenshot_path) == 0:
@@ -226,8 +228,8 @@ class BasePage(object):
         else:
             screenshot_filepath = screenshot_path[0]
         now = time.strftime('%Y_%m_%d_%H_%M_%S')
-        screenshot_filepath = os.path.join(current_dir, '..' ,screenshot_filepath, 'UITest_%s.png' % now)
-        self.driver.get_screenshot_as_file(screenshot_filepath)
+        screenshot_filepath_finally = os.path.join(current_dir, '../' ,screenshot_filepath, 'UITest_%s.png' % now)
+        self.driver.get_screenshot_as_file(screenshot_filepath_finally)
         logger.info('图片截取成功')
 
 

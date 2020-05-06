@@ -4,7 +4,6 @@ import configparser
 
 current_path = os.path.dirname(__file__)
 cfgpath = os.path.join(current_path, "../conf/local_config.ini")
-print(cfgpath)
 
 
 class ConfigUtils:
