@@ -26,6 +26,11 @@ class BasePage(object):
         self.driver.maximize_window()
         logger.info("设置浏览器的最大化")
 
+    def close_tab(self):
+        self.driver.close()
+        logger.info('关闭当前的tab页签')
+
+
     def set_brower_min(self):
         self.driver.minimize_window()
         logger.info("设置浏览器的最小化")
@@ -38,6 +43,7 @@ class BasePage(object):
         value=self.driver.title
         logger.info("获取网页的标题为：%s"%value)
         return value
+
     def quit_brower(self):
         self.driver.quit()
         logger.info("关闭浏览器")

@@ -1,3 +1,4 @@
+#coding=gbk
 from element_infos.login.login_page import LoginPage
 from element_infos.main.main_page import MainPage
 from common.config_utils import config
