@@ -41,6 +41,23 @@ class ConfigUtils:
         value = self.read_ini('default', 'screen_shot_path')
         return value
 
+    @property
+    def testdata_path(self):
+        testdata_path_value = self.read_ini('default', 'testdata_path')
+        return testdata_path_value
+
+    @property
+    def case_path(self):
+        case_path_value = self.read_ini('default', 'case_path')
+        return case_path_value
+
+    @property
+    def report_path(self):
+        report_path_value = self.read_ini('default', 'report_path')
+        return report_path_value
+
+
+
 
 # #直接定义一个方法，在外部直接调用该方法就可以，不需要再每次都创建一个对象
 config=ConfigUtils()
@@ -52,6 +69,8 @@ if __name__=='__main__':
     config_u=ConfigUtils()
     print(config_u.get_url)
     print(config_u.get_user_name)
-    print(config_u.get_password)
-    print(config_u.screenshot_path)
+    print(config_u.testdata_path)
+    print(config_u.case_path)
+    print(config_u.report_path)
+
 
