@@ -232,16 +232,16 @@ class BasePage(object):
 
     #----------------------------截图封装----------------------------------------------------------#
     #测试OK
-    def screenshot_as_file_old(self, *screenshot_path):
-        current_dir = os.path.dirname(__file__)
-        if len(screenshot_path) == 0:
-            screenshot_filepath = config.screenshot_path
-        else:
-            screenshot_filepath = screenshot_path[0]
-        now = time.strftime('%Y_%m_%d_%H_%M_%S')
-        screenshot_filepath_finally = os.path.join(current_dir, '../' ,screenshot_filepath, 'UITest_%s.png' % now)
-        self.driver.get_screenshot_as_file(screenshot_filepath_finally)
-        logger.info('图片截取成功')
+    # def screenshot_as_file_old(self, *screenshot_path):
+    #     current_dir = os.path.dirname(__file__)
+    #     if len(screenshot_path) == 0:
+    #         screenshot_filepath = config.screenshot_path
+    #     else:
+    #         screenshot_filepath = screenshot_path[0]
+    #     now = time.strftime('%Y_%m_%d_%H_%M_%S')
+    #     screenshot_filepath_finally = os.path.join(current_dir, '../' ,screenshot_filepath, 'UITest_%s.png' % now)
+    #     self.driver.get_screenshot_as_file(screenshot_filepath_finally)
+    #     logger.info('图片截取成功')
 
     #如果要在测试报告中截图，需要使用这个截图封装
     def screenshot_as_file(self):
