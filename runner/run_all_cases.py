@@ -43,13 +43,9 @@ class RunAllCases:
         fp.close()
         return dir_path  #返回测试结果的路径
 
-
-
 if __name__ == '__main__':
     dir_path = RunAllCases().run()
-    report_zip_path = dir_path + '/../禅道自动化测试报告.zip'
-    zip_utils.zip_dir(dir_path, report_zip_path)  #调用压缩目录
-    EmailUtils('自动化测试报告（正式版）', 'python自动化测试报告测试', report_zip_path).send_mail()
+    EmailUtils('python自动化测试报告', dir_path).zip_send_mail()
 
 
 

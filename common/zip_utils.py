@@ -4,6 +4,10 @@ import os
 import zipfile
 
 
+import os
+import zipfile
+
+
 def zip_dir(dir_path, zip_path):
     '''
 
@@ -19,7 +23,4 @@ def zip_dir(dir_path, zip_path):
             zip.write(os.path.join(root, filename), os.path.join(file_path, filename))
     zip.close()
 
-current_path = os.path.abspath(os.path.dirname(__file__))
-dri_path = os.path.join( current_path , '..' , 'reports/禅道自动化测试报告V1.5')
 
-zip_dir( dri_path , dri_path+'/../禅道自动化测试报告.zip')
