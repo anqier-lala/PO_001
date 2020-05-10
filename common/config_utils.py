@@ -42,6 +42,16 @@ class ConfigUtils:
         return value
 
     @property
+    def log_path(self):
+        value = self.read_ini('default', 'log_path')
+        return value
+
+    @property
+    def log_level(self):
+        log_level_value = int(self.read_ini('default', 'log_level'))
+        return log_level_value
+
+    @property
     def testdata_path(self):
         testdata_path_value = self.read_ini('default', 'testdata_path')
         return testdata_path_value
@@ -72,5 +82,8 @@ if __name__=='__main__':
     print(config_u.testdata_path)
     print(config_u.case_path)
     print(config_u.report_path)
+    print(config_u.log_path)
+    print(config_u.log_level)
+
 
 
