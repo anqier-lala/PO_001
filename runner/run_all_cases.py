@@ -17,7 +17,7 @@ class RunAllCases:
         self.test_case_path = case_path
         self.report_path = report_path
         self.title = '禅道自动化测试报告'
-        self.description = 'lifangfang—test'
+        self.description = 'lifangfang_test'
 
     def run(self):
         discover = unittest.defaultTestLoader.discover(start_dir = self.test_case_path,

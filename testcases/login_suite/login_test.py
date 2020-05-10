@@ -14,11 +14,12 @@ from common.test_data_utils import TestDataUtils
 
 
 class LoginTest(SeleniumBaseCase):
+    test_class_data = TestDataUtils('login_suite', 'LoginTest').convert_exceldata_to_testdata()
 
     def setUp(self) -> None:
         super().setUp()
-        self.test_class_data = TestDataUtils('login_suite','LoginTest').convert_exceldata_to_testdata()
 
+    @unittest.skipIf(test_class_data['test_login_success']['isnot'],'')  ##类属性给方法用
     def test_login_success(self):
         test_function_data = self.test_class_data['test_login_success']   #  把登录成功的参数传入进来
         self._testMethodDoc = test_function_data['test_name']

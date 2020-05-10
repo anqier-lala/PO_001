@@ -236,7 +236,7 @@ table       { font-size: 100%; }
                     ['通过', 3],
                     {
                         name: '失败',
-                        y: 0,
+                        y: 1,
                         sliced: true,
                         selected: true
                     },
@@ -375,10 +375,10 @@ function html_escape(s) {
 <div style="width: 650px; float: left;">
     <h1 style="font-family: Microsoft YaHei">禅道自动化测试报告</h1>
     <p class='attribute'><strong>测试人员 : </strong> lifangfang</p>
-<p class='attribute'><strong>开始时间 : </strong> 2020-05-08 23:42:51</p>
-<p class='attribute'><strong>合计耗时 : </strong> 0:00:18.464759</p>
-<p class='attribute'><strong>测试结果 : </strong> 共 3，通过 3，通过率 = 100.00%</p>
-<p class='attribute'><strong>失败用例合集 : </strong> <ol style='float: left;'>无</ol></p>
+<p class='attribute'><strong>开始时间 : </strong> 2020-05-10 17:52:37</p>
+<p class='attribute'><strong>合计耗时 : </strong> 0:00:30.613623</p>
+<p class='attribute'><strong>测试结果 : </strong> 共 4，通过 3，失败 1，通过率 = 75.00%</p>
+<p class='attribute'><strong>失败用例合集 : </strong> <div class='panel-default' style='float: left;'><a class='showDetail' data-toggle='collapse' href='#failCaseOl' style='text-decoration: none;'>点击查看</a></div><ol id='failCaseOl' class='collapse' style='float: left;'><li>test_login_success (login_suite.login_test.LoginTest)</li></ol></p>
 <p class='attribute'><strong>错误用例合集 : </strong> <ol style='float: left;'>无</ol></p>
 
     <p class='description'>lifangfang—test</p>
@@ -390,11 +390,11 @@ function html_escape(s) {
 
 <div style="width: 500px; clear: both;">
 <p id='show_detail_line'>
-<a class="btn btn-primary" href='javascript:showCase(0)'>概要{ 100.00% }</a>
+<a class="btn btn-primary" href='javascript:showCase(0)'>概要{ 75.00% }</a>
 <a class="btn btn-success" href='javascript:showCase(2)'>通过{ 3 }</a>
-<a class="btn btn-danger" href='javascript:showCase(1)'>失败{ 0 }</a>
+<a class="btn btn-danger" href='javascript:showCase(1)'>失败{ 1 }</a>
 <a class="btn btn-warning" href='javascript:showCase(3)'>错误{ 0 }</a>
-<a class="btn btn-info" href='javascript:showCase(4)'>所有{ 3 }</a>
+<a class="btn btn-info" href='javascript:showCase(4)'>所有{ 4 }</a>
 </p>
 </div>
 <table id='result_table' class="table table-condensed table-bordered table-hover">
@@ -419,14 +419,14 @@ function html_escape(s) {
     <td>详细</td>
 </tr>
 
-<tr class='passClass warning'>
+<tr class='failClass warning'>
     <td>LoginTest</td>
     <td></td>
     <td class="text-center">2</td>
-    <td class="text-center">2</td>
+    <td class="text-center">1</td>
+    <td class="text-center">1</td>
     <td class="text-center">0</td>
-    <td class="text-center">0</td>
-    <td class="text-center">10.55秒</td>
+    <td class="text-center">14.98秒</td>
     <td class="text-center"><a href="javascript:showClassDetail('c1',2)" class="detail" id='c1'>详细</a></td>
 </tr>
 
@@ -437,9 +437,50 @@ function html_escape(s) {
     <td class='passCase' style="vertical-align: middle"></td>
 </tr>
 
-<tr id='pt1_2' class='hiddenRow'>
-    <td class='passCase' style="vertical-align: middle"><div class='testcase'>test_login_success</div></td>
-    <td style="vertical-align: left">验证是否能成功进行登录</td>
+<tr id='ft1_2' class='none'>
+    <td class='failCase' style="vertical-align: middle"><div class='testcase'>test_login_success</div></td>
+    <td style="vertical-align: middle">验证是否能成功进行登录</td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_2' type="button"  class="btn btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_2'>失败</button>
+    <div id='div_ft1_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou /  修复失败按钮的颜色 -- Gelomen -->
+    <button id='btn_ft1_2' type="button"  class="btn btn-xs" data-toggle="collapse" data-target='#div_ft1_2,#div_ft1_2_screenshot'>失败</button>
+    <div id='div_ft1_2' class="collapse in">
+    <pre style="text-align:left">
+    
+ft1_2: errorImg[1.png]errorImg, browser[chrome(81.0.4044.138)]browser
+Traceback (most recent call last):
+  File "D:\Git_code\PO_001\testcases\login_suite\login_test.py", line 29, in test_login_success
+    self.assertEqual(actual_result,test_function_data['excepted_result'],'test_login_success用例执行失败')
+AssertionError: 'admin' != 'admin111'
+- admin
++ admin111
+?      +++
+ : test_login_success用例执行失败
+
+
+    </pre>
+    </div>
+    </td>
+    <td class="text-center" style="vertical-align: middle"><div id='div_ft1_2_screenshot' class="collapse in">浏览器版本：<div style="color: brown;">chrome(81.0.4044.138)</div></br>截图：</br><a class="screenshot" href="javascript:void(0)" img="image/1.png">img_1.png</a></div></td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>LinkTest</td>
+    <td></td>
+    <td class="text-center">1</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">7.49秒</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c2',1)" class="detail" id='c2'>详细</a></td>
+</tr>
+
+<tr id='pt2_1' class='hiddenRow'>
+    <td class='passCase' style="vertical-align: middle"><div class='testcase'>test_goto_myzone</div></td>
+    <td style="vertical-align: left">验证点击进入我的地盘</td>
     <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
     <td class='passCase' style="vertical-align: middle"></td>
 </tr>
@@ -451,27 +492,25 @@ function html_escape(s) {
     <td class="text-center">1</td>
     <td class="text-center">0</td>
     <td class="text-center">0</td>
-    <td class="text-center">7.92秒</td>
-    <td class="text-center"><a href="javascript:showClassDetail('c2',1)" class="detail" id='c2'>详细</a></td>
+    <td class="text-center">8.13秒</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c3',1)" class="detail" id='c3'>详细</a></td>
 </tr>
 
-    <tr id='pt2_1' class='hiddenRow'>
+    <tr id='pt3_1' class='hiddenRow'>
         <td class='passCase' style="vertical-align: middle"><div class='testcase'>test_quit</div></td>
-        <td style="vertical-align: middle"></td>
+        <td style="vertical-align: middle">验证是否能退出登录</td>
         <td colspan='5' align='center'>
         <!--默认收起错误信息 -Findyou
-        <button id='btn_pt2_1' type="button"  class="btn btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_1'>通过</button>
-        <div id='div_pt2_1' class="collapse">  -->
+        <button id='btn_pt3_1' type="button"  class="btn btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_1'>通过</button>
+        <div id='div_pt3_1' class="collapse">  -->
 
         <!-- 默认展开错误信息 -Findyou /  修复失败按钮的颜色 -- Gelomen -->
-        <button id='btn_pt2_1' type="button"  class="btn btn-xs" data-toggle="collapse" data-target='#div_pt2_1'>通过</button>
-        <div id='div_pt2_1' class="collapse in">
+        <button id='btn_pt3_1' type="button"  class="btn btn-xs" data-toggle="collapse" data-target='#div_pt3_1'>通过</button>
+        <div id='div_pt3_1' class="collapse in">
         <pre style="text-align:left">
         
-pt2_1: 登录成功
-点击用户名成功
+pt3_1: 点击用户名成功
 点击退出按钮成功
-用户登录 - 禅道
 
 
         </pre>
@@ -482,12 +521,12 @@ pt2_1: 登录成功
     
 <tr id='total_row' class="text-center active">
     <td colspan='2'>总计</td>
+    <td>4</td>
     <td>3</td>
-    <td>3</td>
+    <td>1</td>
     <td>0</td>
-    <td>0</td>
-    <td>18.47秒</td>
-    <td>通过率：100.00%</td>
+    <td>30.6秒</td>
+    <td>通过率：75.00%</td>
 </tr>
 </table>
 
