@@ -13,7 +13,8 @@ class QuitTest(SeleniumBaseCase):
 
     def setUp(self) -> None:
         super().setUp()
-        self.test_class_data = TestDataUtils('main_suit','QuitTest').convert_exceldata_to_testdata()
+        self.test_class_data = TestDataUtils('main_suite', 'main_test', 'QuitTest').convert_exceldata_to_testdata()
+
 
     def test_quit(self):
         login_action = LoginAction(self.base_page.driver)

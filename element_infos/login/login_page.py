@@ -27,7 +27,7 @@ class LoginPage(BasePage):
         #                           'locator_value': '//button[@id="submit"]',
         #                           'timeout': 2}
         ####-----------------第二种方式，使用excecl读取---------------------####
-        elements = ElementdataUtils('login').get_element_info('login_page')
+        elements = ElementdataUtils('login','login_page').get_element_info()
         ####-----------------第三种方式，使用yaml读取---------------------####
         # current_path = os.path.dirname(__file__)
         # yaml_path = os.path.join(current_path, '../element_info_datas/element_login_infos.yaml')
@@ -61,10 +61,10 @@ if __name__=="__main__":
     login_page.input_username('admin')
     login_page.input_password('201314ANQIER1')
     login_page.click_login()
-    value=login_page.get_alert_content(action='accept', timeout=config.get_timeout)
-    print(value)
-    login_page.wait(1)
-    login_page.screenshot_as_file()  ##需要先建立路径，才能截屏
+    # value=login_page.get_alert_content(action='accept', timeout=config.get_timeout)
+    # print(value)
+    # login_page.wait(1)
+    # login_page.screenshot_as_file()  ##需要先建立路径，才能截屏
 
 
 

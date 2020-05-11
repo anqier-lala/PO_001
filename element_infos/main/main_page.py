@@ -12,7 +12,7 @@ from common.set_driver import set_driver
 class MainPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)  # 子类调用父类的属性
-        elements = ElementdataUtils('main').get_element_info('main_page')
+        elements = ElementdataUtils('main','main_page').get_element_info()
         self.companyname_showbox =elements['companyname_showbox']
         self.myzone_menu=elements['myzone_menu']
         self.product_menu=elements['product_menu']

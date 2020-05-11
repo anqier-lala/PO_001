@@ -18,7 +18,7 @@ class LinkTest(SeleniumBaseCase):
 
     def setUp(self) -> None:
         super().setUp()
-        self.test_class_data = TestDataUtils('main_suit','LinkTest').convert_exceldata_to_testdata()
+        self.test_class_data = TestDataUtils('main_suite', 'main_test', 'LinkTest').convert_exceldata_to_testdata()
 
     def test_goto_myzone(self):
         login_action = LoginAction(self.base_page.driver)

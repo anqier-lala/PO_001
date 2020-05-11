@@ -42,6 +42,11 @@ class ConfigUtils:
         return value
 
     @property
+    def element_info_path(self):
+        value = self.read_ini('default', 'element_info_path')
+        return value
+
+    @property
     def log_path(self):
         value = self.read_ini('default', 'log_path')
         return value
@@ -112,7 +117,7 @@ if __name__=='__main__':
     print(config_u.case_path)
     print(config_u.report_path)
     print(config_u.log_path)
-    print(config_u.log_level)
+    print(config_u.element_info_path)
 
 
 
