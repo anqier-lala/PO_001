@@ -4,10 +4,6 @@ import os
 import zipfile
 
 
-import os
-import zipfile
-
-
 def zip_dir(dir_path, zip_path):
     '''
 
