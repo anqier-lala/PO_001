@@ -249,7 +249,13 @@ class BasePage(object):
         report_dir = HTMLTestReportCN.ReportDirectory(report_path)
         report_dir.get_screenshot( self.driver )
 
-
-
+    #----------------------------下拉框封装----------------------------------------------------------#
+    def select_drop_down_box(self,element_info1,element_info2):
+        element1 = self.find_element(element_info1)
+        element2 = self.find_element(element_info2)
+        logger.info('[%s]元素进行点击操作'%element_info1['element_name'])
+        element1.click()
+        logger.info('[%s]元素进行点击操作'%element_info2['element_name'])
+        element2.click()
 
 

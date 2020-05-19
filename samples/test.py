@@ -4,7 +4,7 @@ from common.base_page import BasePage
 from common.config_utils import config
 from common.set_driver import set_driver
 from element_infos.login.login_page import LoginPage
-
+from selenium.webdriver.common.by import By
 
 # ##调试代码
 # class Test(BasePage):
@@ -43,8 +43,17 @@ login.input_username("admin")
 # login.clear_input(login.username_inputbox)  #清空
 login.input_password('201314ANQIER1')
 login.enter(login.login_button)  ##回车登录
+time.sleep(2)
+driver.find_element(By.XPATH,"//div[@class='input-group-btn']").click() # 识别OK
+time.sleep(1)
+# driver.find_element(By.XPATH,'//a[@data-value="project"]').click()
+driver.find_element(By.XPATH,'//a[@data-value="project"]').click()
 
-
+driver.find_element(By.XPATH,"//input[@id='searchInput']").send_keys('002')
+driver.find_element(By.XPATH,'//a[@href="javascript:$.gotoObject();"]').click()
+# print(driver.find_element(By.XPATH,'//span[@class="text"]').text)   #BUG、需求、任务、用例
+time.sleep(1)
+print(driver.find_element(By.XPATH,'//button[@id="currentItem"]').text)   #项目、产品
 
 
 
